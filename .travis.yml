@@ -1,0 +1,25 @@
+language: node_js
+
+node_js:
+  - 6.10.0
+
+notifications:
+  webhooks:
+    urls:
+      - https://webhooks.gitter.im/e/df34abab39aac12ba44f
+    on_success: always
+    on_failure: always
+    on_start: always
+
+  slack:
+    secure: Zs8e7rfZSGkSIZistClGIpSwGcakhcqpIBPrzkXFP+7lLD/TCgpRXKYQowcA+8Uz83R+Ve5Ig2csNuSFS3iwm8FVxLYo0xwAnjKNt/BNBtGXWOKkVZM/t2AUnjC0/WsRJPWwaStfLIdw5N7851+LElozdlyZOEfVH3cFfQ81SeORM5yea7q5f08L5krK/D5QTdAsuE/weN//yXWzp3oCCtuml2InF0tfDjvlV+6eH+CSdMyRVtLgzl2zUbWXfMyZcZIzHhFy/ycOlZir8IigRAyJo8V3z3s7q5tEQl3jv9AsBOW9n0gMpSo9sNFOT89t/sigOLbMVuo00gtfGcXA7ngw19iMAq66ugFe3cu+ArpkqdXlg8IGtqhe4h+TKCd1Qi68seT4eZR7trwLgloua+nUjrofU1yjkpbe6kOVNOpSPy/bb6MdBvSt5sjx9LQvJWGrZk+Cp12yf1+jyTupUHyOzQ9Zx7zMxPTCnOq7YMOya6gXimGYC+yT75diWUMzENDKFadzSw7y77p4CEPjpCjp8Kl7oCyN2kM/9+26143JGqkv9zJ0N/5BvmIY8p2zBmFH/PAEL/Ay7cuweJbYZTLTVgyegZT5dro2paHdNyqQ3QUCFV+GpbgDJFJXC/XQl4Gh4+XIb5wWM2VS1BCVpnmoEZsxL7dPDbr3VWcotig=
+
+install:
+  - npm install -g ng
+  - npm install
+
+script:
+  - npm test
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

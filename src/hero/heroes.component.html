@@ -1,0 +1,81 @@
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Heroes</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<table>
+  <thead>
+    <th class="mat-title">ID</th>
+    <th class="mat-title">Name</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let hero of heroes">
+      <td class="mat-body-1">
+        {{hero.id}}
+      </td>
+      <td
+        class="mat-body-1"
+        (click)="edit(hero)">
+        <mat-form-field *ngIf="hero.isEditing">
+          <input
+            matInput
+            [(ngModel)]="hero.name"
+            (keyup.enter)="save(hero)"
+            (blur)="save(hero)"
+            [disabled]="isLoading"
+            [focus]="hero.isEditing"
+          />
+        </mat-form-field>
+        {{hero.isEditing? '' : hero.name}}
+      </td>
+      <td>
+        <button
+          mat-icon-button
+          *ngIf="!hero.isEditing"
+          (click)="edit(hero)"
+          [disabled]="isLoading">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          *ngIf="hero.isEditing"
+          (click)="save(hero)"
+          [disabled]="isLoading">
+          <mat-icon>save</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          *ngIf="!hero.isEditing"
+          (click)="delete(hero)"
+          [disabled]="isLoading">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <mat-form-field>
+          <input
+            matInput
+            #name
+            placeholder="Hero's name"
+            (keyup.enter)="add(name.value); name.value=''"
+            [disabled]="isLoading"
+          />
+        </mat-form-field>
+      </td>
+      <td>
+        <button
+          mat-icon-button
+          (click)="add(name.value); name.value=''"
+          [disabled]="isLoading">
+          <mat-icon>add</mat-icon>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
